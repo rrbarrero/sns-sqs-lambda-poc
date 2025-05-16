@@ -1,4 +1,4 @@
-# Terraform Playground: API -> SNS -> SQS -> Lambda
+# Terraform Playground: API -> SNS -> SQS -> Lambda -> S3
 
 This is a little "toy project" I put together to mess around with various AWS services (all simulated with LocalStack, of course) and to get my hands dirty with Terraform in a slightly more involved setup. The main idea was to practice the message flow from an API endpoint through to a set of Lambda functions, using SNS and SQS as the intermediaries.
 
@@ -34,11 +34,13 @@ ImportantEvents"];
     B --> C1["SQS Queue
 ProcessOrder"];
     B --> C2["SQS Queue
-SendNotification"];
+Billing"];
     C1 --> D1["Lambda
 OrderProcessor"];
     C2 --> D2["Lambda
-UserNotification"];
+BillingProcessor 🚧"];
+    D1 --> E1["S3 bucket"]
+    D2 --> E2["TODO]
 
     subgraph "Event Source"
         A
@@ -56,6 +58,11 @@ UserNotification"];
     subgraph "Processing Logic"
         D1
         D2
+    end
+
+    subgraph "Output"
+        E1
+        E2
     end
 ```
 
@@ -97,6 +104,8 @@ You'll find the Terraform files in the `ops/terraform` directory.
     terraform apply --auto-approve
     ```
 4.  **Test it out:**
-    *   Star fastapi service in src/main/main.py with `uv run python -m src.main.main` and post a message with swagger.
+    * Start fastapi service in src/main/main.py with `uv run python -m src.main.main` and post a message with swagger.
 
-    *   Check the LocalStack logs (`docker logs <your_localstack_container_name>`) to see the Lambdas being invoked and processing the messages.
+    * Install lambda deps in place with `pip install -r requirements.txt -t .`. On this example only orders it's done.
+
+    * Check the LocalStack logs (`docker logs <your_localstack_container_name>`) to see the Lambdas being invoked and processing the messages.
