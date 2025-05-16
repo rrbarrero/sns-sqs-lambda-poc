@@ -27,7 +27,6 @@ I've set up a fairly common event-driven data flow:
 **Quick Conceptual Diagram:**
 
 ```mermaid
-
 graph TD
     A[Client/API POST <br/> (FastAPI - Future)] --> B(SNS Topic <br/> "ImportantEvents");
     B --> C1[SQS Queue <br/> "ProcessOrder"];
