@@ -96,7 +96,9 @@ You'll find the Terraform files in the `ops/terraform` directory.
     Make sure your `docker-compose.yml` for LocalStack is configured (especially the `SERVICES` environment variable to include `sns`, `sqs`, `lambda`, `iam`).
     
 3.  **Deploy Infrastructure:**
-    Navigate to the `/terraform` directory (or wherever your Terraform files are):
+    * Install orders lambda deps in place with `pip install -r requirements.txt -t .`. On this example only orders it's done.
+
+    Navigate to the `/terraform` directory:
     ```bash
     cd terraform
     terraform init
@@ -105,7 +107,5 @@ You'll find the Terraform files in the `ops/terraform` directory.
     ```
 4.  **Test it out:**
     * Start fastapi service in src/main/main.py with `uv run python -m src.main.main` and post a message with swagger.
-
-    * Install lambda deps in place with `pip install -r requirements.txt -t .`. On this example only orders it's done.
 
     * Check the LocalStack logs (`docker logs <your_localstack_container_name>`) to see the Lambdas being invoked and processing the messages.
