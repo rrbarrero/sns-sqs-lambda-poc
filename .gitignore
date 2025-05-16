@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.ruff_cache
+
+# Virtual environments
+.venv
+
+*.zip
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+*.hcl
+
+# pytest
+.pytest_cache/
+
+.terraform
+.vscode
