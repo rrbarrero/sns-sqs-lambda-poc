@@ -39,8 +39,8 @@ Billing"];
 OrderProcessor"];
     C2 --> D2["Lambda
 BillingProcessor 🚧"];
-    D1 --> E1["S3 bucket"]
-    D2 --> E2["TODO]
+    D1 --> E1["S3 bucket"];
+    D2 --> E2["TODO"];
 
     subgraph "Event Source"
         A
