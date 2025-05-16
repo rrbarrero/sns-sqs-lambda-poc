@@ -26,18 +26,32 @@ I've set up a fairly common event-driven data flow:
 
 **Quick Conceptual Diagram:**
 
-```
-[Client/API POST] ---> (astAPI API)
-                             |
-                             v
-                     [SNS Topic: "ImportantEvents"]
-                        /                    \
-                       /                      \
-                      v                        v
-        [SQS Queue: "ProcessOrder"]   [SQS Queue: "SendNotification"]
-                |                               |
-                v                               v
-    [Lambda: "OrderProcessor"]     [Lambda: "UserNotification"]
+```mermaid
+
+graph TD
+    A[Client/API POST <br/> (FastAPI - Future)] --> B(SNS Topic <br/> "ImportantEvents");
+    B --> C1[SQS Queue <br/> "ProcessOrder"];
+    B --> C2[SQS Queue <br/> "SendNotification"];
+    C1 --> D1[Lambda <br/> "OrderProcessor"];
+    C2 --> D2[Lambda <br/> "UserNotification"];
+
+    subgraph "Event Source"
+        A
+    end
+
+    subgraph "Messaging & Dispatch"
+        B
+    end
+
+    subgraph "Queueing & Decoupling"
+        C1
+        C2
+    end
+
+    subgraph "Processing Logic"
+        D1
+        D2
+    end
 ```
 
 
