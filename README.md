@@ -28,7 +28,7 @@ I've set up a fairly common event-driven data flow:
 
 ```mermaid
 graph TD
-    A["Client/API POST\n(FastAPI - Future)"] --> B("SNS Topic\n\"ImportantEvents\"");
+    A["Client/API POST\n(FastAPI)"] --> B("SNS Topic\n\"ImportantEvents\"");
     B --> C1["SQS Queue\n\"ProcessOrder\""];
     B --> C2["SQS Queue\n\"SendNotification\""];
     C1 --> D1["Lambda\n\"OrderProcessor\""];
