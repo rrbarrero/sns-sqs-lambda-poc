@@ -28,11 +28,11 @@ I've set up a fairly common event-driven data flow:
 
 ```mermaid
 graph TD
-    A[Client/API POST <br/> (FastAPI - Future)] --> B(SNS Topic <br/> "ImportantEvents");
-    B --> C1[SQS Queue <br/> "ProcessOrder"];
-    B --> C2[SQS Queue <br/> "SendNotification"];
-    C1 --> D1[Lambda <br/> "OrderProcessor"];
-    C2 --> D2[Lambda <br/> "UserNotification"];
+    A["Client/API POST\n(FastAPI - Future)"] --> B("SNS Topic\n\"ImportantEvents\"");
+    B --> C1["SQS Queue\n\"ProcessOrder\""];
+    B --> C2["SQS Queue\n\"SendNotification\""];
+    C1 --> D1["Lambda\n\"OrderProcessor\""];
+    C2 --> D2["Lambda\n\"UserNotification\""];
 
     subgraph "Event Source"
         A
