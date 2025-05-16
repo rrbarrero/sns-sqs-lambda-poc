@@ -25,6 +25,8 @@ I've set up a fairly common event-driven data flow:
     *   Each Lambda can then process the message independently.
 
 **Quick Conceptual Diagram:**
+
+```
 [Client/API POST] ---> (astAPI API)
                              |
                              v
@@ -36,6 +38,7 @@ I've set up a fairly common event-driven data flow:
                 |                               |
                 v                               v
     [Lambda: "OrderProcessor"]     [Lambda: "UserNotification"]
+```
 
 
 ## Infrastructure as Code with Terraform
